@@ -97,6 +97,22 @@ export function createRestUserAuthAdapter(client: any = axios): IUserAuthService
 
     async deleteUser(id: number | string): Promise<void> {
       await client.delete(`/api/Kullanicilar/${id}`);
+    },
+
+    async login(credentials: { email: string; password: string; rememberMe?: boolean }) {
+      const res = await client.post('/api/Auth/giris', {
+        email: credentials.email,
+        sifre: credentials.password,
+        password: credentials.password,
+        rememberMe: credentials.rememberMe
+      });
+      if (res.data?.token || res.data?.access_token) {
+        return { success: true };
+      }
+      return {
+        success: Boolean(res.data?.success),
+        message: res.data?.message
+      };
     }
   };
 }
@@ -253,6 +269,17 @@ export function createLocalStorageUserAuthAdapter(): IUserAuthServiceAdapter {
       const list = getUsersFromStorage();
       const filtered = list.filter(u => String(u.id) !== String(id));
       localStorage.setItem(USERS_KEY, JSON.stringify(filtered));
+    },
+
+    async login(credentials: { email: string; password: string }) {
+      const admins = getSuperAdminsFromStorage();
+      const matched = admins.find(
+        a => a.email.toLowerCase() === credentials.email.trim().toLowerCase()
+      );
+      if (matched) {
+        return { success: true };
+      }
+      return { success: false, message: 'Geçersiz e-posta veya şifre.' };
     }
   };
 }

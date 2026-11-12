@@ -1,17 +1,20 @@
 /**
  * @akalin/user_auth_module - Modül Tanım Fabrikası (createUserAuthModule.tsx)
- * @akalin/module_core (IModuleDefinition) ile tam uyumlu Kullanıcı ve Yetki Yönetimi Modülü üretir.
+ * @akalin/module_core (IModuleDefinition) ve @akalin/module_management ile %100 uyumlu
+ * Kullanıcı & Yetki Yönetimi Modülü (KullaniciVeYetkiModule) ve Merkezi Kimlik Doğrulama
+ * Modülü (AuthModule) üretir.
  */
 
 import React, { lazy } from 'react';
-import { Users, Shield, UserCog } from 'lucide-react';
-import type { IModuleDefinition } from '@akalin/module_core';
-import { CreateUserAuthModuleOptions } from './types';
+import { Lock, Shield, Users } from 'lucide-react';
+import type { IModuleDefinition, IRouteDefinition } from '@akalin/module_core';
+import { CreateAuthModuleOptions, CreateUserAuthModuleOptions } from './types';
 import {
   createRestUserAuthAdapter,
   setGlobalUserAuthModuleConfig,
   UserAuthModuleProvider
 } from './adapters/UserAuthServiceContext';
+import UserAuthLoginPage from './pages/LoginPage';
 
 const SuperAdminListPage = lazy(() => import('./pages/SuperAdminListPage'));
 const RolVeYetkilerPage = lazy(() => import('./pages/RolVeYetkilerPage'));
@@ -40,37 +43,58 @@ export function createUserAuthModule(options: CreateUserAuthModuleOptions = {}):
     </UserAuthModuleProvider>
   );
 
+  const ConnectedLoginPage: React.FC<any> = (props) => (
+    <UserAuthModuleProvider value={{ adapter, onNotify: options.onNotify }}>
+      <UserAuthLoginPage {...(options.loginPageProps || {})} {...props} />
+    </UserAuthModuleProvider>
+  );
+
+  const routes: IRouteDefinition[] = [
+    {
+      path: baseRoute,
+      element: React.createElement(ConnectedSuperAdminListPage),
+      title: 'Kullanıcı Yönetimi'
+    },
+    {
+      path: superAdminRoute,
+      element: React.createElement(ConnectedSuperAdminListPage),
+      title: 'Sistem Yöneticileri'
+    },
+    {
+      path: rolesRoute,
+      element: React.createElement(ConnectedRolVeYetkilerPage),
+      title: 'Rol ve Yetkiler'
+    },
+    {
+      path: '/ayarlar/RolVeYetkiler',
+      element: React.createElement(ConnectedRolVeYetkilerPage),
+      title: 'Rol ve Yetki Yönetimi'
+    }
+  ];
+
+  if (options.loginRoute) {
+    routes.unshift({
+      path: options.loginRoute,
+      element: React.createElement(ConnectedLoginPage),
+      title: 'Sisteme Giriş',
+      isPublic: true
+    });
+  }
+
   return {
     id: options.id || 'kullanici_ve_yetki',
+    aliases: ['auth', 'user_auth', 'kullanici_yetki'],
     title: 'Kullanıcı & Yetki Yönetimi',
     name: 'Kullanıcı & Yetki Yönetimi',
-    description: 'Sistem süper yöneticileri, roller, izin matrisi ve personel yetkilendirmesi.',
+    description:
+      'Merkezi kimlik doğrulama (Login), sistem süper yöneticileri, roller, izin matrisi ve personel yetkilendirmesi.',
     icon: React.createElement(Users, { size: 20 }),
-    iconName: 'UserCog',
+    iconName: 'Users',
     order: options.order ?? 40,
+    isCore: options.isCore ?? true,
+    defaultActive: true,
     permissionPrefix: 'auth',
-    routes: [
-      {
-        path: baseRoute,
-        element: React.createElement(ConnectedSuperAdminListPage),
-        title: 'Kullanıcı Yönetimi'
-      },
-      {
-        path: superAdminRoute,
-        element: React.createElement(ConnectedSuperAdminListPage),
-        title: 'Sistem Yöneticileri'
-      },
-      {
-        path: rolesRoute,
-        element: React.createElement(ConnectedRolVeYetkilerPage),
-        title: 'Rol ve Yetkiler'
-      },
-      {
-        path: '/ayarlar/RolVeYetkiler',
-        element: React.createElement(ConnectedRolVeYetkilerPage),
-        title: 'Rol ve Yetki Yönetimi'
-      }
-    ],
+    routes,
     menuItems: [
       {
         id: 'menu_kullanicilar',
@@ -140,10 +164,53 @@ export function createUserAuthModule(options: CreateUserAuthModuleOptions = {}):
     ],
     components: {
       SuperAdminListPage: ConnectedSuperAdminListPage,
-      RolVeYetkilerPage: ConnectedRolVeYetkilerPage
+      RolVeYetkilerPage: ConnectedRolVeYetkilerPage,
+      LoginPage: ConnectedLoginPage,
+      UserAuthLoginPage: ConnectedLoginPage
+    }
+  };
+}
+
+/**
+ * @akalin/module_management ve modules.json ('exportName': 'AuthModule') ile
+ * tam uyumlu çekirdek Kimlik Doğrulama (Login) modülü fabrikası.
+ */
+export function createAuthModule(options: CreateAuthModuleOptions = {}): IModuleDefinition {
+  const loginRoute = options.loginRoute || '/login';
+  const title = options.title || 'Kimlik Doğrulama';
+
+  const ResolvedLoginComponent: React.ComponentType<any> = options.loginPageComponent
+    ? options.loginPageComponent
+    : (props: any) => <UserAuthLoginPage {...(options.loginPageProps || {})} {...props} />;
+
+  return {
+    id: options.id || 'auth',
+    aliases: ['authentication', 'login'],
+    title,
+    name: title,
+    description: 'Merkezi kullanıcı kimlik doğrulama, oturum yönetimi ve güvenli giriş modülü.',
+    icon: React.createElement(Lock, { size: 20 }),
+    iconName: 'Lock',
+    order: options.order ?? 99,
+    isCore: options.isCore ?? true,
+    defaultActive: true,
+    permissionPrefix: 'auth',
+    routes: [
+      {
+        path: loginRoute,
+        element: React.createElement(ResolvedLoginComponent),
+        title,
+        isPublic: true
+      }
+    ],
+    menuItems: [],
+    components: {
+      LoginPage: ResolvedLoginComponent,
+      UserAuthLoginPage: ResolvedLoginComponent
     }
   };
 }
 
 export const KullaniciVeYetkiModule = createUserAuthModule();
+export const AuthModule = createAuthModule();
 export default createUserAuthModule;

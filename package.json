@@ -1,7 +1,7 @@
 {
   "name": "@akalin/user_auth_module",
-  "version": "1.0.0",
-  "description": "Webakus ERP ekosistemi için bağımsız, yeniden kullanılabilir kullanıcı, rol, yetki ve süper admin yönetim modülü.",
+  "version": "1.1.0",
+  "description": "Webakus ERP, AdminUI, ThinkPort API ve Studio (Builder) ekosistemi için bağımsız kullanıcı, rol, yetki, süper admin ve merkezi Login (kimlik doğrulama) modülü.",
   "type": "module",
   "main": "src/index.ts",
   "types": "src/index.ts",

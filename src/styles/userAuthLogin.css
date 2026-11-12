@@ -1,0 +1,658 @@
+/**
+ * @akalin/user_auth_module - Merkezi Kimlik Doğrulama (Login) Sayfası Stilleri (userAuthLogin.css)
+ * Webakus.UI, Webakus.AdminUI, ThinkPort API ve Studio (Builder) projelerinde
+ * %100 görsel bütünlük ve sıfır satır içi CSS (Zero Inline CSS) ilkesiyle çalışır.
+ */
+
+.ua-login-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: radial-gradient(
+      circle at 18% 18%,
+      rgba(99, 102, 241, 0.12) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 82% 82%,
+      rgba(59, 130, 246, 0.1) 0%,
+      transparent 45%
+    ),
+    var(--bg-app, var(--bg-primary, var(--md-sys-color-surface, #f8fafc)));
+  position: relative;
+  box-sizing: border-box;
+}
+
+.ua-login-topbar {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 30;
+}
+
+.ua-topbar-btn {
+  padding: 6px 12px;
+  min-height: 36px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+  background: var(
+    --bg-secondary,
+    var(--md-sys-color-surface-container-lowest, var(--surface-primary, #ffffff))
+  );
+  border: 1px solid var(--glass-border, rgba(148, 163, 184, 0.28));
+  color: var(--text-primary, #0f172a);
+  box-shadow: var(--md3-elevation-1, 0 4px 12px rgba(0, 0, 0, 0.08));
+}
+
+.ua-login-card {
+  width: 100%;
+  max-width: 452px;
+  padding: 36px 34px;
+  border-radius: var(--md3-shape-extra-large, 20px);
+  background: var(
+    --bg-secondary,
+    var(--md-sys-color-surface-container-lowest, var(--surface-primary, #ffffff))
+  );
+  border: 1px solid var(--glass-border, var(--md-sys-color-outline-variant, rgba(148, 163, 184, 0.25)));
+  box-shadow: var(--md3-elevation-3, 0 20px 45px rgba(0, 0, 0, 0.14));
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: max-width 0.25s ease;
+  box-sizing: border-box;
+}
+
+.ua-login-card--wide {
+  max-width: 560px;
+}
+
+.ua-login-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.ua-login-brand-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--accent-primary, var(--primary, #4f46e5)), #4338ca);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+  box-shadow: 0 10px 24px rgba(79, 70, 229, 0.34);
+}
+
+.ua-login-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+  letter-spacing: -0.4px;
+}
+
+.ua-login-subtitle {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-secondary, #64748b);
+}
+
+.ua-login-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: var(--md3-shape-medium, 10px);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.ua-login-banner--error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.28);
+  border-left: 4px solid var(--danger, #ef4444);
+  color: var(--danger, #ef4444);
+}
+
+.ua-login-banner--success {
+  background: rgba(16, 185, 129, 0.11);
+  border: 1px solid rgba(16, 185, 129, 0.28);
+  border-left: 4px solid var(--success, #10b981);
+  color: var(--success, #10b981);
+}
+
+.ua-login-banner-icon {
+  flex-shrink: 0;
+}
+
+.ua-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ua-field-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ua-field-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary, #0f172a);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ua-login-options-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ua-login-options-row--end {
+  justify-content: flex-end;
+}
+
+.ua-forgot-btn {
+  padding: 4px 8px;
+  min-height: 30px;
+  font-size: 12.5px;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  color: var(--accent-primary, var(--primary, #4f46e5));
+}
+
+.ua-forgot-btn:hover {
+  background: var(--hover-bg, rgba(99, 102, 241, 0.08));
+}
+
+.ua-password-toggle-btn {
+  padding: 4px 8px;
+  min-height: 30px;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  color: var(--text-secondary, #64748b);
+}
+
+.ua-password-toggle-btn:hover {
+  background: var(--hover-bg, rgba(148, 163, 184, 0.14));
+  color: var(--text-primary, #0f172a);
+}
+
+.ua-login-submit-btn {
+  width: 100%;
+  justify-content: center;
+  padding: 13px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.ua-login-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 2px 0;
+  opacity: 0.65;
+}
+
+.ua-login-divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--glass-border, rgba(148, 163, 184, 0.35));
+}
+
+.ua-login-divider-text {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text-secondary, #64748b);
+}
+
+.ua-login-biometric-btn {
+  width: 100%;
+  justify-content: center;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ua-login-workspace-footer {
+  padding-top: 12px;
+  border-top: 1px solid var(--glass-border, rgba(148, 163, 184, 0.24));
+  display: flex;
+  justify-content: center;
+}
+
+.ua-workspace-link-btn {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  color: var(--accent-primary, var(--primary, #4f46e5));
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 6px 12px;
+}
+
+.ua-workspace-link-btn:hover {
+  background: var(--hover-bg, rgba(99, 102, 241, 0.08));
+}
+
+.ua-login-footer-note {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-secondary, #64748b);
+  text-align: center;
+  max-width: 460px;
+}
+
+/* Agent / Test Hızlı Giriş Kartı */
+.ua-login-card .agent-login-card {
+  background: var(--accent-light, rgba(99, 102, 241, 0.08));
+  border: 1px dashed var(--accent-primary, var(--primary, #4f46e5));
+  border-radius: var(--md3-shape-medium, 12px);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ua-login-card .agent-login-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ua-login-card .agent-login-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--accent-primary, var(--primary, #4f46e5));
+}
+
+.ua-login-card .agent-login-status-tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--success, #10b981);
+}
+
+.ua-login-card .agent-credentials-grid {
+  display: grid;
+  grid-template-columns: 1.45fr 0.85fr;
+  gap: 8px;
+}
+
+.ua-login-card .agent-credential-item {
+  background: var(
+    --bg-secondary,
+    var(--md-sys-color-surface-container-lowest, var(--surface-primary, #ffffff))
+  );
+  border: 1px solid var(--glass-border, rgba(148, 163, 184, 0.25));
+  border-radius: var(--md3-shape-small, 8px);
+  padding: 6px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ua-login-card .agent-credential-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--text-secondary, #64748b);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.ua-login-card .agent-credential-value {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary, #0f172a);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ua-login-card .agent-login-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ua-agent-primary-btn {
+  flex: 1;
+  justify-content: center;
+  font-size: 12.5px;
+  padding: 8px 12px;
+}
+
+.ua-agent-fill-btn {
+  justify-content: center;
+  font-size: 12.5px;
+  padding: 8px 12px;
+  background: var(--bg-secondary, var(--surface-primary, #ffffff));
+}
+
+/* Çoklu Firma ve Şube Seçim Adımları */
+.ua-selection-step {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ua-selection-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ua-selection-item-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--md3-shape-medium, 12px);
+  background: var(--bg-primary, var(--surface-secondary, #f8fafc));
+  border: 1px solid var(--glass-border, rgba(148, 163, 184, 0.25));
+  text-align: left;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
+}
+
+.ua-selection-item-btn--disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.ua-selection-chevron {
+  color: var(--text-secondary, #64748b);
+  flex-shrink: 0;
+}
+
+.ua-selection-item-btn:hover {
+  border-color: var(--accent-primary, var(--primary, #4f46e5));
+  background: var(--hover-bg, rgba(99, 102, 241, 0.06));
+}
+
+.ua-selection-item-content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ua-selection-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--accent-light, rgba(99, 102, 241, 0.12));
+  color: var(--accent-primary, var(--primary, #4f46e5));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ua-selection-texts {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.ua-selection-name {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-primary, #0f172a);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ua-selection-sub {
+  font-size: 12px;
+  color: var(--text-secondary, #64748b);
+}
+
+.ua-selection-create-btn {
+  width: 100%;
+  justify-content: center;
+  padding: 13px 16px;
+  border-style: dashed;
+  border-color: var(--accent-primary, var(--primary, #4f46e5));
+  color: var(--accent-primary, var(--primary, #4f46e5));
+  margin-top: 4px;
+}
+
+.ua-selection-back-btn {
+  width: 100%;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.ua-empty-workspace {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 20px 8px;
+}
+
+.ua-empty-workspace-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--accent-light, rgba(99, 102, 241, 0.12));
+  color: var(--accent-primary, var(--primary, #4f46e5));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ua-empty-workspace-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+}
+
+.ua-empty-workspace-desc {
+  margin: 0 0 8px 0;
+  font-size: 13.5px;
+  color: var(--text-secondary, #64748b);
+}
+
+/* Çalışma Alanı (Yeni Firma) Oluşturma Formu Stilleri */
+.ua-workspace-form-card {
+  background: var(--bg-secondary, var(--surface-primary, #ffffff));
+  padding: 20px;
+  border-radius: var(--md3-shape-large, 16px);
+  border: 1px dashed var(--accent-primary, var(--primary, #4f46e5));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ua-workspace-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ua-workspace-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.ua-workspace-row-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.ua-workspace-subdomain-suffix {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--text-secondary, #64748b);
+  padding-right: 4px;
+}
+
+.ua-workspace-scale-card {
+  padding: 12px 8px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  cursor: pointer;
+  border: 1px solid var(--glass-border, rgba(148, 163, 184, 0.25));
+  background: var(--bg-primary, var(--surface-secondary, #f8fafc));
+}
+
+.ua-workspace-scale-card--active {
+  border-color: var(--accent-primary, var(--primary, #4f46e5));
+  background: var(--accent-light, rgba(99, 102, 241, 0.1));
+  color: var(--accent-primary, var(--primary, #4f46e5));
+}
+
+.ua-workspace-scale-title {
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.ua-workspace-scale-sub {
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.ua-workspace-counts-box {
+  background: var(--accent-light, rgba(99, 102, 241, 0.06));
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px dashed rgba(99, 102, 241, 0.3);
+}
+
+.ua-workspace-count-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-primary, var(--primary, #4f46e5));
+}
+
+.ua-workspace-sector-wrapper {
+  position: relative;
+}
+
+.ua-workspace-sector-trigger {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.ua-workspace-sector-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 6px;
+  z-index: 25;
+  background: var(--bg-secondary, var(--surface-primary, #ffffff));
+  border: 1px solid var(--glass-border, rgba(148, 163, 184, 0.3));
+  border-radius: 12px;
+  box-shadow: var(--md3-elevation-2, 0 8px 24px rgba(0, 0, 0, 0.12));
+  max-height: 250px;
+  overflow-y: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ua-workspace-sector-parent {
+  padding: 6px 8px;
+  border-radius: 8px;
+}
+
+.ua-workspace-sector-children {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ua-workspace-actions {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.ua-workspace-action-btn {
+  width: 100%;
+  justify-content: center;
+}
+
+@media (max-width: 576px) {
+  .ua-workspace-row,
+  .ua-workspace-row-3,
+  .ua-workspace-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .ua-login-card {
+    padding: 26px 20px;
+  }
+
+  .ua-login-card .agent-credentials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ua-login-card .agent-login-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
